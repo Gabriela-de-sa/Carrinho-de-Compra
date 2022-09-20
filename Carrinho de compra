@@ -1,0 +1,70 @@
+class Car:
+    def __init__(self, saldo):
+        self.__saldo = saldo
+        self.__lista = {}
+    
+    #retorna o saldo atual
+    @property
+    def saldo(self):
+        print(f'Saldo atual: R${self.__saldo}')
+
+    # adiciona saldo
+    def deposita(self, valor):
+        self.__saldo += valor
+        return self.__saldo
+
+    # retorna a lista de compra
+    @property
+    def lista(self):
+        #return ([str(i) for i in self.__lista.items()])
+        print('-*'*30)
+        for i in self.__lista:
+            #print(*i)
+            print(f"Item: {i} {'-*'*5} {self.__lista[i]}")
+        
+    # retorna o total em valor da compra
+    def get_total_compra(self):
+        soma = 0
+        for i in self.__lista.values():
+            soma += i
+        print(f'Total da compra: R${soma}')
+
+    # adiciona produtos ao carrinho
+    def adiciona(self, prod, valor):
+        self.__lista[prod] = valor
+        self.__saldo -= valor
+        print(f'{prod} add. Valor: {valor}')
+        print(f'saldo: R${self.__saldo}')
+    
+    #retira algum produto do carrinho e add valor no saldo inicial
+    def retira_item(self, prod):
+        if prod in self.__lista:
+            valor = self.__lista[prod]
+            self.__saldo += valor
+            self.__lista.pop(prod)
+            print(f'Item retirado: {prod}')
+            print(f'saldo: R${self.__saldo}')
+
+
+# Objeto
+prod1 = Car(1000.0)
+#add produto
+prod1.adiciona('arroz', 10.0)
+prod1.adiciona('feijao', 20.0)
+prod1.adiciona('leite', 50.0)
+prod1.adiciona('bombom', 40.0)
+
+
+prod1.get_total_compra()
+
+#deposita valor
+prod1.deposita(1000)
+
+#saldo atual
+prod1.saldo
+
+#retira produto da lista
+prod1.retira_item('leite')
+
+#retorna lista de itens completa
+prod1.lista
