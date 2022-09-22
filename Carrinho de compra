@@ -16,10 +16,8 @@ class Car:
     # retorna a lista de compra
     @property
     def lista(self):
-        #return ([str(i) for i in self.__lista.items()])
         print('-*'*30)
         for i in self.__lista:
-            #print(*i)
             print(f"Item: {i} {'-*'*5} {self.__lista[i]}")
         
     # retorna o total em valor da compra
